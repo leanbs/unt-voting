@@ -13,6 +13,10 @@ body {
 footer {
   padding: 30px 0;
 }
+a {
+  cursor: pointer; 
+  text-decoration: none;
+}
 
 /*
  * Off Canvas
@@ -78,3 +82,101 @@ footer {
     color:#fff !important;
     z-index:2;
 }
+
+.row-afandi-ver
+{
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: -10px;
+}
+
+.no-margin
+{
+    margin: 0;
+}
+
+.no-padding
+{
+    padding: 0;
+}
+
+.upload-btn
+{
+  cursor:pointer; 
+  padding: 2px 85px 2px 85px; 
+  border: solid 2px rgba(186, 0, 0, 1); 
+  color: rgba(186, 0, 0, 1); 
+  text-decoration: none;
+}
+
+.navigation-badge
+{
+  font-size: 20px; 
+  padding:5px 10px 5px 10px; 
+  border-radius: 100%; 
+  background-color: #8c8c8c; 
+  color: white;
+}
+
+.navigation-badge-active
+{
+  font-size: 20px; 
+  padding:5px 10px 5px 10px; 
+  border-radius: 100%; 
+  background-color: #4dc3ff; 
+  color: white;
+}
+
+.navigation-font
+{
+  font-size: 25px;
+  color: #8c8c8c;
+}
+
+.navigation-font-active
+{
+  font-size: 25px; 
+  color: #4dc3ff;
+}
+
+.color-blue
+{
+  color: #4dc3ff;
+}
+
+.border-blue
+{
+  border: solid 2px #4dc3ff; 
+}
+
+.border-top-none
+{
+  border-top: none;
+}
+
+.border-right-none
+{
+  border-right: none;
+}
+
+.border-bottom-none
+{
+  border-bottom: none;
+}
+
+.border-left-none
+{
+  border-left: none;
+}
+
+.navigation-padding
+{
+  padding: 20px;
+}
+
+.padding-top-15
+{
+  padding-top: 15px;
+}
+

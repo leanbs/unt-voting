@@ -4,15 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Vote extends Model
+class ForbiddenEmail extends Model
 {
-   	/**
+    /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'vote';
-    protected $primaryKey = 'id_vote';
+    protected $table = 'forbiddenemail';
 
     /**
      * The attributes that are mass assignable.
@@ -20,13 +19,6 @@ class Vote extends Model
      * @var array
      */
     protected $fillable = [
-        'email',
-        'vote_code',
-        'status'
+        'forbidden_email'
     ];
-
-    public function booth()
-    {
-    	return $this->belongsTo('App\Booth', 'id_booth', 'id_booth');
-    }
 }
