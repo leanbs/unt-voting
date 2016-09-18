@@ -14,106 +14,32 @@
             <h1>Hello, world!</h1>
             <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
           </div>
+
           <div class="row">
-            <div class="col-xs-6 col-lg-4">
-              <div class="thumbnail">
-                <a href="{{ url('vote/spasia') }}" class="">
-                  <div class="caption">
-                      <h4 class="">Team 1</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                  </div>
-                  <img src="http://localhost/ewOnline/public/img.png" alt="..." class="">
-                </a>
+            <div class="row">
+              <div class="col-md-12 col-xs-12" style="padding: 0 30px 0 30px;">
+                <div class="col-md-4 col-xs-4 navigation-padding border-blue">
+                  <span class="navigation-badge navigation-badge-active">1</span>
+                  &nbsp;
+                  <span class="navigation-font navigation-font-active">Choose wisely</span>
+                </div>
+                <div class="col-md-4 col-xs-4 navigation-padding border-blue border-left-none border-right-none">
+                  <span id="navigation-badge-2" class="navigation-badge">2</span>
+                  &nbsp;
+                  <span id="navigation-font-2" class="navigation-font">Are you human?</span>
+                </div>
+                <div class="col-md-4 col-xs-4 navigation-padding border-blue">
+                  <span id="navigation-badge-3" class="navigation-badge">3</span>
+                  &nbsp;
+                  <span id="navigation-font-3" class="navigation-font">Thankyou!</span>
+                </div>
               </div>
             </div>
-            <div class="col-xs-6 col-lg-4">
-              <div class="thumbnail">
-                <a href="#" class="">
-                  <div class="caption">
-                      <h4 class="">Team 2</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                  </div>
-                  <img src="http://192.168.1.3/ewOnline/public/img.png" alt="..." class="">
-                </a>
-              </div>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <div class="thumbnail">
-                <a href="#" class="">
-                  <div class="caption">
-                      <h4 class="">Team 3</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                  </div>
-                  <img src="http://localhost/ewOnline/public/img.png" alt="..." class="">
-                </a>
-              </div>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <div class="thumbnail">
-                <a href="#" class="">
-                  <div class="caption">
-                      <h4 class="">Team 4</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                  </div>
-                  <img src="http://localhost/ewOnline/public/img.png" alt="..." class="">
-                </a>
-              </div>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <div class="thumbnail">
-                <a href="#" class="">
-                  <div class="caption">
-                      <h4 class="">Team 5</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                  </div>
-                  <img src="http://localhost/ewOnline/public/img.png" alt="..." class="">
-                </a>
-              </div>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <div class="thumbnail">
-                <a href="#" class="">
-                  <div class="caption">
-                      <h4 class="">Team 6</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                  </div>
-                  <img src="http://localhost/ewOnline/public/img.png" alt="..." class="">
-                </a>
-              </div>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <div class="thumbnail">
-                <a href="#" class="">
-                  <div class="caption">
-                      <h4 class="">Team 6</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                  </div>
-                  <img src="http://localhost/ewOnline/public/img.png" alt="..." class="">
-                </a>
-              </div>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <div class="thumbnail">
-                <a href="#" class="">
-                  <div class="caption">
-                      <h4 class="">Team 6</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                  </div>
-                  <img src="http://localhost/ewOnline/public/img.png" alt="..." class="">
-                </a>
-              </div>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <div class="thumbnail">
-                <a href="#" class="">
-                  <div class="caption">
-                      <h4 class="">Team 6</h4>
-                      <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                  </div>
-                  <img src="http://localhost/ewOnline/public/img.png" alt="..." class="">
-                </a>
-              </div>
-            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="row">
+              <div id="vote"></div>
+              {{-- <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_PUBLIC_KEY') }}"></div> --}}
+            </div>
+            
           </div><!--/row-->
         </div><!--/.col-xs-12.col-sm-9-->
 
@@ -144,17 +70,14 @@
 @section('script')
 <script type="text/javascript">
   $(document).ready(function(){
-    $("[data-toggle='tooltip']").tooltip(); 
-   
-    $('.thumbnail').hover(
-      function(){
-          $(this).find('.caption').slideDown(250); //.fadeIn(250)
-      },
-      function(){
-          $(this).find('.caption').slideUp(250); //.fadeOut(205)
-      }
-    ); 
+    $("[data-toggle='tooltip']").tooltip();   
+    
   });
+
+  $(function(){                      
+    var loadUrl = "voteForm";
+    $("#vote").load(loadUrl);
+  });  
 </script>
     
 
