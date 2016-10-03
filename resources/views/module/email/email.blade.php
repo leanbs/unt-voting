@@ -11,6 +11,6 @@
 	<h3>{{ $vote_code }}</h3>
 	<br><br><br><br><br>
 	~Terimakasih~,<br><br>
-	<p style="color:red;">Toko Sherly Busana.</p>	
+	<p style="color:red;">Entrepreneurship Week 2016.</p>	
 </body>
 </html>

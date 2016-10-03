@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('pages.vote');
 });
 
+Route::get('login', 'Auth\AuthController@getLogin');
+
 Route::get('vote/{name}', 'VoteController@getVote');
 Route::get('voteForm', 'VoteController@getVoteForm');
 Route::post('postVote', 'VoteController@postVote');
@@ -22,7 +24,6 @@ Route::get('verifyForm/{id}', 'VoteController@getVerifyForm');
 Route::post('postEmail', 'VoteController@postEmail');
 Route::post('postVerify', 'VoteController@postVerify');
 Route::get('thankyouForm', 'VoteController@getThankyouForm');
-
 
 
 Route::get('cpanel', 'AdminController@cpanel');

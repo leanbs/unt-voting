@@ -76,9 +76,7 @@
         <div id="bar-chart-department"></div>
             <div id="donut-chart"></div>
             <div id="chart"></div>
-            
-            
-        </div><!-- /.content-chart.main-content -->
+        </div>
     </div>
 
 @section('script')
