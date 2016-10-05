@@ -34,3 +34,4 @@ Route::get('modalEditBooth/{id}', 'AdminController@getModalEditBooth');
 Route::post('modalEditBooth', 'AdminController@postModalEditBooth');
 Route::get('modalDeleteBooth/{id}', 'AdminController@getModalDeleteBooth');
 Route::post('modalDeleteBooth', 'AdminController@postModalDeleteBooth');
+Route::get('tableVote', 'AdminController@getTableVote');

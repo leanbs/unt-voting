@@ -6,6 +6,7 @@ use DB;
 use Validator;
 use Illuminate\Http\Request;
 use App\Voting;
+use App\Vote;
 use App\Http\Requests;
 use App\Booth;
 use App\rmdir;
@@ -271,5 +272,41 @@ class AdminController extends Controller
 
         return $result;
 
+    }
+
+    public function getTableVote()
+    {
+        $vote = Vote::join('booth', 'vote.id_booth', '=', 'booth.id_booth')
+                    ->where('vote.status', '=', '1')
+                    ->select([
+                        'vote.id_vote as IdVote',
+                        'booth.nama_produk as NamaBrand',
+                        'vote.email as Email',
+                        'vote.updated_at as Tanggal',      
+                    ]);
+
+        return Datatables::of($vote)
+            ->addColumn('Pengaturan', function ($votes) {
+                return
+                    '<a id="delete-vote-'. $votes->IdVote .'" style="color: red; text-decoration: none; cursor: pointer;"><i class="fa fa-trash-o"></i> Delete</a>
+
+                    <script type="text/javascript">
+                        // delete
+                        $(function(){
+                            $.ajaxSetup ({
+                                cache: false
+                            });
+                            var id = "'. $votes->IdVotes .'";                                  
+                            var loadUrl = "modalDeleteVote/"+id;
+                            $("#delete-vote-"+id).click(function(){
+                                $("#modal-body-deleteVote").load(loadUrl, function(result){
+                                    $("#modalDeleteVote").modal({show:true});
+                                });
+                            });
+                        });
+                    </script>';
+            })
+            ->removeColumn('IdVote')
+            ->make(true);
     }
 }

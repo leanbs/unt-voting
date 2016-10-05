@@ -34,31 +34,35 @@
                 </div><!-- /.navigation -->
 
                 <div class="tab-content" id="tabs">
-                    <div id="booth-container" class="tab-pane fade" style="margin-top: 20px;">                    
-                        <table class="table table-bordered table-hover table-striped" id="table-booth">
-                            <thead style="color: rgba(186, 0, 0, 1);">
-                                <tr>
-                                    <th class="text-center col-xs-2 col-md-2">Logo</th>
-                                    <th class="text-center col-xs-2 col-md-2">Nama Brand</th>
-                                    <th class="text-center col-xs-2 col-md-2">Anggota Kelompok</th>
-                                    <th class="text-center col-xs-4 col-md-4">Deskripsi</th>
-                                    <th class="text-center col-xs-2 col-md-2">Pengaturan</th>
-                                </tr>
-                            </thead>
-                        </table>
+                    <div id="booth-container" class="tab-pane fade" style="margin-top: 20px;">     
+                        <div class="row row-afandi-ver no-margin">               
+                            <table class="table table-bordered table-hover table-striped" id="table-booth">
+                                <thead style="color: rgba(186, 0, 0, 1);">
+                                    <tr>
+                                        <th class="text-center col-xs-2 col-md-2">Logo</th>
+                                        <th class="text-center col-xs-2 col-md-2">Nama Brand</th>
+                                        <th class="text-center col-xs-2 col-md-2">Anggota Kelompok</th>
+                                        <th class="text-center col-xs-4 col-md-4">Deskripsi</th>
+                                        <th class="text-center col-xs-2 col-md-2">Pengaturan</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
-                    <div id="vote-container" class="tab-pane fade" style="margin-top: 20px;">                    
-                        <table class="table table-bordered table-hover table-striped" id="">
-                            <thead style="color: rgba(186, 0, 0, 1);">
-                                <tr>
-                                    <th class="text-center col-xs-2 col-md-2">Logo</th>
-                                    <th class="text-center col-xs-2 col-md-2">Nama Brand</th>
-                                    <th class="text-center col-xs-2 col-md-2">Anggota Kelompok</th>
-                                    <th class="text-center col-xs-4 col-md-4">Deskripsi</th>
-                                    <th class="text-center col-xs-2 col-md-2">Pengaturan</th>
-                                </tr>
-                            </thead>
-                        </table>
+
+                    <div id="vote-container" class="tab-pane fade" style="margin-top: 20px;">      
+                        <div class="row row-afandi-ver no-margin">
+                            <table class="table table-bordered table-hover table-striped" id="table-vote">
+                                <thead style="color: rgba(186, 0, 0, 1);">
+                                    <tr>
+                                        <th class="text-center col-xs-3 col-md-3">Nama Booth</th>
+                                        <th class="text-center col-xs-3 col-md-3">Email</th>
+                                        <th class="text-center col-xs-3 col-md-3">Tanggal / Waktu</th>
+                                        <th class="text-center col-xs-3 col-md-3">Pengaturan</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>   
                     </div>
                 </div>
             </div>
@@ -111,6 +115,24 @@
                     { 'data': 'NamaBrand', 'name': 'nama_produk' },
                     { 'data': 'AnggotaKelompok', 'name': 'anggota_kelompok' },
                     { 'data': 'Des', 'name': 'deskripsi_produk' },
+                    { 'data': 'Pengaturan', 'name': 'Pengaturan', 'orderable': false, 'searchable': false },
+                ]
+            });
+
+        var DataTableVote = $('#table-vote').DataTable({
+                columnDefs: [
+                    {
+                        'className' : 'text-center text-nowrap',
+                        'targets'   : [ 2, -1],
+                    },
+                ],
+                processing: true,
+                serverSide: true,
+                ajax: '{{ url('tableVote') }}',
+                columns: [
+                    { 'data': 'NamaBrand', 'name': 'booth.nama_produk' },
+                    { 'data': 'Email', 'name': 'vote.email' },
+                    { 'data': 'Tanggal', 'name': 'vote.updated_at' },
                     { 'data': 'Pengaturan', 'name': 'Pengaturan', 'orderable': false, 'searchable': false },
                 ]
             });
