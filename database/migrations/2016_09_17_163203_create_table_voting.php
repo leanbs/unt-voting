@@ -14,7 +14,7 @@ class CreateTableVoting extends Migration
     {
         Schema::create('forbiddenemail', function (Blueprint $table) {
             $table->increments('id_forbiddenemail');
-            $table->unsignedInteger('forbidden_email');
+            $table->string('forbidden_email', 60);
         });
 
 
