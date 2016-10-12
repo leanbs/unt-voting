@@ -6,9 +6,11 @@ use DB;
 use Validator;
 use Illuminate\Http\Request;
 use App\Voting;
+use App\Vote;
 use App\Http\Requests;
 use App\Booth;
 use App\rmdir;
+use App\ForbiddenEmail;
 use Datatables;
 
 class AdminController extends Controller
@@ -138,7 +140,7 @@ class AdminController extends Controller
             ->addColumn('Pengaturan', function ($booths) {
                 return
                     '<a id="edit-booth-'. $booths->IdBooth .'" style="color: blue; text-decoration: none; cursor: pointer;"><i class="fa fa-pencil-square-o"></i>Edit</a>&nbsp;&nbsp;
-                    <a id="delete-booth-'. $booths->IdBooth .'" data-toggle="modal" data-target="#deleteModal" style="color: red; text-decoration: none; cursor: pointer;"><i class="fa fa-trash-o"></i>Delete</a>
+                    <a id="delete-booth-'. $booths->IdBooth .'" style="color: red; text-decoration: none; cursor: pointer;"><i class="fa fa-trash-o"></i>Delete</a>
 
                     <script type="text/javascript">
                         // edit
@@ -272,4 +274,212 @@ class AdminController extends Controller
         return $result;
 
     }
+
+    public function getTableVote()
+    {
+        $vote = Vote::join('booth', 'vote.id_booth', '=', 'booth.id_booth')
+                    ->where('vote.status', '=', '1')
+                    ->select([
+                        'vote.id_vote as IdVote',
+                        'booth.nama_produk as NamaBrand',
+                        'vote.email as Email',
+                        'vote.updated_at as Tanggal',      
+                    ]);
+
+        return Datatables::of($vote)
+            ->addColumn('Pengaturan', function ($votes) {
+                return
+                    '<a id="delete-vote-'. $votes->IdVote .'" style="color: red; text-decoration: none; cursor: pointer;"><i class="fa fa-trash-o"></i> Delete</a>
+
+                    <script type="text/javascript">
+                        // delete
+                        $(function(){
+                            $.ajaxSetup ({
+                                cache: false
+                            });
+                            var id = "'. $votes->IdVote .'";                           
+                            var loadUrl = "modalDeleteVote/"+id;   
+                            $("#delete-vote-"+id).click(function(){
+                                $("#modal-body-deleteVote").load(loadUrl, function(result){
+                                    $("#modalDeleteVote").modal({show:true});
+                                });
+                            });
+                        });
+                    </script>';
+            })
+            ->removeColumn('IdVote')
+            ->make(true);
+    }
+
+    public function getModalDeleteVote($id)
+    {
+        return view('modal.admin.vote.delete.formDelete')
+                    ->with('id', $id);
+    }    
+
+    public function postModalDeleteVote(Request $request)
+    {       
+        DB::beginTransaction();
+
+            $id = $request->id;
+
+            $vote = Vote::find($id);
+            $vote->delete();         
+
+        DB::commit(); 
+
+        return 'vote deleted';
+
+    }
+
+    public function getTableForbidden()
+    {
+        $forbiddenEmail = ForbiddenEmail::select([
+                        'id_forbiddenemail as IdForbiddenEmail',
+                        'forbidden_email as ForbiddenEmail',    
+                    ]);
+
+        return Datatables::of($forbiddenEmail)
+            ->addColumn('Pengaturan', function ($forbidden) {
+                return
+                    '<a id="edit-ForbiddenEmail-'. $forbidden->IdForbiddenEmail .'" style="color: blue; text-decoration: none; cursor: pointer;"><i class="fa fa-pencil-square-o"></i>Edit</a>&nbsp;&nbsp;
+                    <a id="delete-ForbiddenEmail-'. $forbidden->IdForbiddenEmail .'" style="color: red; text-decoration: none; cursor: pointer;"><i class="fa fa-trash-o"></i>Delete</a>
+
+                    <script type="text/javascript">
+                        // edit
+                        $(function(){
+                            $.ajaxSetup ({
+                                cache: false
+                            });
+                            var id = "'. $forbidden->IdForbiddenEmail .'";                                  
+                            var loadUrl = "modalEditForbiddenEmail/"+id;
+                            $("#edit-ForbiddenEmail-"+id).click(function(){
+                                $("#modal-body-editForbiddenEmail").load(loadUrl, function(result){
+                                    $("#modalEditForbiddenEmail").modal({show:true});
+                                });
+                            });
+                        });
+
+                        // delete
+                        $(function(){
+                            $.ajaxSetup ({
+                                cache: false
+                            });
+                            var id = "'. $forbidden->IdForbiddenEmail .'";                                  
+                            var loadUrl = "modalDeleteForbiddenEmail/"+id;
+                            $("#delete-ForbiddenEmail-"+id).click(function(){
+                                $("#modal-body-deleteForbiddenEmail").load(loadUrl, function(result){
+                                    $("#modalDeleteForbiddenEmail").modal({show:true});
+                                });
+                            });
+                        });
+                    </script>';
+            })
+            ->removeColumn('IdForbiddenEmail')
+            ->make(true);
+    }
+
+    public function getModalAddForbidden()
+    {
+        return view('modal.admin.forbiddenEmail.add.formAdd');
+    }
+
+    protected function validatorPostModalAddForbidden(array $data)
+    {
+        return Validator::make($data, [
+            'Email'             => 'required|unique:forbiddenemail,forbidden_email',
+        ]);      
+    }
+
+    public function postModalAddForbidden(Request $request)
+    {
+        $validator = $this->validatorPostModalAddForbidden($request->all());
+        if ($validator->fails()) 
+        {
+            $this->throwValidationException($request, $validator);
+        }
+
+
+
+        $Email = strip_tags($request->input('Email'));
+
+        DB::beginTransaction();
+            $forbiddenEmail = new ForbiddenEmail ([
+                'forbidden_email'    => $Email
+            ]);
+            $forbiddenEmail->save();
+        DB::commit(); 
+
+        return 'forbidden email added';
+
+    }
+
+    public function getModalEditForbidden($id)
+    {
+        $forbiddenEmail = ForbiddenEmail::find($id);
+
+        return view('modal.admin.forbiddenEmail.edit.formEdit')
+                    ->with('forbiddenEmail', $forbiddenEmail);
+    }
+
+    public function postModalEditForbidden(Request $request)
+    {
+        $validator = $this->validatorPostModalAddForbidden($request->all());
+        if ($validator->fails()) 
+        {
+            $this->throwValidationException($request, $validator);
+        }
+
+        $id = $request->input('id');
+        $Email = strip_tags($request->input('Email'));
+
+        DB::beginTransaction();
+            $forbiddenEmail = ForbiddenEmail::find($id);
+            $forbiddenEmail->forbidden_email = $Email;
+            $forbiddenEmail->save();
+        DB::commit(); 
+
+        return 'forbidden email added';
+
+    }
+
+    public function getModalDeleteForbiddenEmail($id)
+    {
+        return view('modal.admin.forbiddenEmail.delete.formDelete')
+                    ->with('id', $id);
+    }    
+
+    public function postModalDeleteForbiddenEmail(Request $request)
+    {       
+        DB::beginTransaction();
+
+            $id = $request->id;
+
+            $vote = ForbiddenEmail::find($id);
+            $vote->delete();         
+
+        DB::commit(); 
+
+        return 'forbidden email deleted';
+
+    }
+
+    public function getChartVote()
+    {
+        $report = Booth::select([
+                        'nama_produk as NamaBooth',
+                        DB::raw(
+                            '(SELECT COALESCE(COUNT(vote.id_vote), 0) 
+                             FROM vote 
+                             WHERE id_booth = booth.id_booth AND status = 1) as Jumlah'
+                        )
+                    ]);            
+
+
+        foreach ($report->get() as $value) {
+            $result[] = ["Nama" => $value->NamaBooth, "Jumlah" => $value->Jumlah];
+        }
+
+        return response()->json($result);;
+    }  
 }
