@@ -12,6 +12,8 @@ class ForbiddenEmail extends Model
      * @var string
      */
     protected $table = 'forbiddenemail';
+    protected $primaryKey = 'id_forbiddenemail';
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
