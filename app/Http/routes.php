@@ -15,6 +15,13 @@ Route::get('/', function () {
     return view('pages.vote');
 });
 
+//login and register routes
+Route::get('register', 'Auth\AuthController@getRegister');
+Route::get('login', 'Auth\AuthController@getLogin');
+Route::post('login', 'Auth\AuthController@postLogin');
+Route::get('logout', 'Auth\AuthController@getLogout');
+
+//voting routes
 Route::get('vote/{name}', 'VoteController@getVote');
 Route::get('voteForm', 'VoteController@getVoteForm');
 Route::post('postVote', 'VoteController@postVote');
@@ -23,8 +30,7 @@ Route::post('postEmail', 'VoteController@postEmail');
 Route::post('postVerify', 'VoteController@postVerify');
 Route::get('thankyouForm', 'VoteController@getThankyouForm');
 
-
-
+//admin routes
 Route::get('cpanel', 'AdminController@cpanel');
 Route::get('report', 'AdminController@index');
 Route::get('modalAddBooth', 'AdminController@getModalAddBooth');
@@ -45,6 +51,3 @@ Route::post('modalEditForbiddenEmail', 'AdminController@postModalEditForbidden')
 Route::get('modalDeleteForbiddenEmail/{id}', 'AdminController@getModalDeleteForbiddenEmail');
 Route::post('modalDeleteForbiddenEmail', 'AdminController@postModalDeleteForbiddenEmail');
 Route::get('chartVote', 'AdminController@getChartVote');
-Route::auth();
-
-Route::get('/home', 'HomeController@index');

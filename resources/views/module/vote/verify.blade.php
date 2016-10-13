@@ -24,7 +24,7 @@
 						        {!! Form::label('email', 'Email') !!}
 						        {!! Form::email('email', null, [
 						            'class'         => 'form-control',
-						            'placeholder'   => 'ex: moo@mail.com'
+						            'placeholder'   => 'ex: email@mail.com'
 						        ]) !!}
 						    </div>
 

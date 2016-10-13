@@ -6,7 +6,7 @@
         {!! Form::label('NamaBrand', 'Nama Brand') !!}
         {!! Form::text('NamaBrand', null, [
             'class'         => 'form-control',
-            'placeholder'   => 'ex: kribcorn'
+            'placeholder'   => 'ex: brand kelompok'
         ]) !!}
     </div>
 
@@ -14,7 +14,7 @@
         {!! Form::label('AnggotaKelompok', 'Anggota Kelompok') !!}
         {!! Form::text('AnggotaKelompok', null, [
             'class'         => 'form-control',
-            'placeholder'   => 'ex: moo1, moo2, moo3, dst~'
+            'placeholder'   => 'ex: Anggota1, Anggota2, Anggota3, dst.'
         ]) !!}
     </div>
 
@@ -24,7 +24,7 @@
             'class'       => 'form-control',
             'rows'        => '3',
             'cols'        => '40',
-            'placeholder' => 'ex: Cara baru makan Popcorn.',
+            'placeholder' => 'ex: Deskripsi atau Slogan.',
         ]) !!}
     </div>
 
