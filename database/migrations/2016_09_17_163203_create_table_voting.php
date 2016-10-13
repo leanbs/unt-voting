@@ -24,6 +24,7 @@ class CreateTableVoting extends Migration
             $table->string('email');
             $table->string('vote_code');
             $table->tinyInteger('status')->default(0);
+            $table->string('ip_addr', 45);
             $table->timestamps();
         });
 

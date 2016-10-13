@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Voting;
 use App\Booth;
 use App\Vote;
 use App\ForbiddenEmail;
@@ -33,24 +32,6 @@ class VoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //$this->validate($request, $this->rules);
-
-        $voting = Voting::create($request->all());
-
-        return response()->json([
-            'success' => trans('action.success.add'),
-        ]);
-    }
-
-    public function getVote($vote)
-    {
-        $votes = new Voting;
-        $votes->vote = $vote;
-        $votes->save();
-        return redirect()->back();
-    }
 
     public function getVoteForm()
     {
@@ -93,6 +74,13 @@ class VoteController extends Controller
         $email = strip_tags($request->input('email'));
         $extensionEmail = explode("@", $email);
         $error = [];
+        $ip = $request->ip();
+        // $ip = $request->getClientIp();
+
+        // $ip = $_SERVER['REMOTE_ADDR'];
+        // if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
+        //     $ip = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
+        // }
 
         $forbiddenEmail = ForbiddenEmail::where('forbidden_email', '=', $extensionEmail[1])->first();
 
@@ -104,7 +92,8 @@ class VoteController extends Controller
 
                 $vote = new Vote ([
                     'email'             => $email,
-                    'vote_code'         => $voteCode
+                    'vote_code'         => $voteCode,
+                    'ip_addr'           => $ip
                 ]);
                 $vote->booth()->associate($id);
                 $vote->save();

@@ -22,7 +22,8 @@ class Vote extends Model
     protected $fillable = [
         'email',
         'vote_code',
-        'status'
+        'status',
+        'ip_addr'
     ];
 
     public function booth()
