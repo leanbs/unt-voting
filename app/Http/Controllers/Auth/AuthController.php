@@ -31,13 +31,20 @@ class AuthController extends Controller
     protected $redirectTo = '/cpanel';
 
     /**
+     * Path to redirect after logging out.
+     *
+     * @var string
+     */
+    protected $redirectAfterLogout = '/';
+
+    /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => 'getLogout']);
     }
 
     /**
@@ -75,21 +82,24 @@ class AuthController extends Controller
         return view('layouts.public.login');
     }
 
+    public function getRegister()
+    {
+        return view('layouts.public.register');
+    }
+
     public function postRegister(Request $request)
     {
         $validator = $this->validator($request->all());
-
         if ($validator->fails()) {
             $this->throwValidationException($request, $validator);
         }
-
         if (! empty($error = $this->create($request->all()))) {
             return redirect()->back()->withErrors([
                 $error,
             ]);
         } else {
             return redirect($this->loginPath)
-                ->with('status', 'Your account has been created, check your email to setup password.');
+                ->with('status', 'Your account has been created.');
         }
     }
 }
