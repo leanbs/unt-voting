@@ -14,6 +14,17 @@ use Datatables;
 
 class AdminController extends Controller
 {
+
+    /**
+     * Constructor + restrict user to access cpanel.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display page to manage current resource.
      *
@@ -23,7 +34,7 @@ class AdminController extends Controller
     {
         return view('pages.admin');
     }
-
+    
     public function getModalAddBooth()
     {
         return view('modal.admin.booth.add.formAdd');

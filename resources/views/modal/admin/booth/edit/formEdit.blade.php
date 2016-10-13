@@ -6,7 +6,7 @@
         {!! Form::label('NamaBrand', 'Nama Brand') !!}
         {!! Form::text('NamaBrand', $booth->nama_produk, [
             'class'         => 'form-control',
-            'placeholder'   => 'ex: kribcorn'
+            'placeholder'   => 'ex: brand kelompok'
         ]) !!}
     </div>
 

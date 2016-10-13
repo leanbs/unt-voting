@@ -1,6 +1,8 @@
 @extends('layouts.main')
 
 @section('page-content')
+    @include('layouts.nav')
+    
     @include('modal.admin.booth.add.add')
     @include('modal.admin.booth.edit.edit')
     @include('modal.admin.booth.delete.delete')

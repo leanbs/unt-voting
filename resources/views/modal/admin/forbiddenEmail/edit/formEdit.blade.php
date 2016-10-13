@@ -6,7 +6,7 @@
         {!! Form::label('Email', 'Email') !!}
         {!! Form::text('Email', $forbiddenEmail->forbidden_email, [
             'class'         => 'form-control',
-            'placeholder'   => 'ex: moo.com'
+            'placeholder'   => 'ex: forbiddenemail.com'
         ]) !!}
     </div>
 

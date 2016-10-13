@@ -5,10 +5,8 @@
  */
 html,
 body {
-  overflow-x: hidden; /* Prevent scroll on narrow devices */
-}
-body {
   padding-top: 70px;
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
 footer {
   padding: 30px 0;
@@ -19,7 +17,7 @@ a {
 }
 
 /*
- * Off Canvas
+ * Off Canvas navbar
  * --------------------------------------------------
  */
 @media screen and (max-width: 767px) {
