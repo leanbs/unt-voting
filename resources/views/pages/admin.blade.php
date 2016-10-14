@@ -51,7 +51,7 @@
                                 <i class="fa fa-thumbs-up"></i> 
                                 VOTE
                                 <a id="btnDeleteAllVote" class="btn btn-danger pull-right" style="margin-top: 5px;">
-                                    <i class="fa fa-plus"></i> Delete Vote
+                                    <i class="fa fa-trash"></i> Delete Vote
                                 </a>
                             </h2>       
                         </div>    
