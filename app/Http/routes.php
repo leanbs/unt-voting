@@ -28,6 +28,7 @@ Route::get('voteForm', 'VoteController@getVoteForm');
 Route::post('postVote', 'VoteController@postVote');
 Route::get('verifyForm/{id}', 'VoteController@getVerifyForm');
 Route::post('postEmail', 'VoteController@postEmail');
+Route::post('postSendVerifyAgain', 'VoteController@postSendVerifyAgain');
 Route::post('postVerify', 'VoteController@postVerify');
 Route::get('thankyouForm', 'VoteController@getThankyouForm');
 

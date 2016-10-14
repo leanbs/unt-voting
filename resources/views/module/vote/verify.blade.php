@@ -38,7 +38,9 @@
 						{!! Form::close() !!}
 					</div>
 					<div id="verify-form" style="display: none;">
-						<span>still not receiving the verification code? <a href="#">click here</a></span>
+						<span>still not receiving the verification code? 
+                            <a id="send-verify-again" style="text-decoration: none; color: #4dc3ff;">click here</a>
+                        </span>
 						{!! Form::open(['url' => 'verifyCode', 'method' => 'post', 'name' =>'verifycodeform']) !!}
 						    <div class="form-group">
 						        {!! Form::label('code', 'Code') !!}
@@ -97,17 +99,9 @@
             { 
             	if (response == 'success') 
             	{
-            		setTimeout(function(){
-            			$('.form-control').prop('disabled', false);
-                        setTimeout(function(){
-                            $('#alert-success').fadeOut('slow');
-                        }, 500);
-                    }, 1000);
-
             		$('#alert-fail').hide();
-            		// var successHtml = '<ul><li>voting code has been sent to your email address</li></ul>';
-            		// $('#alert-success').html(successHtml).fadeIn('slow');
-            		$('#email-form').fadeOut('slow');
+            		$('#email-form').hide();
+                    $('.form-control').prop('disabled', false);
             		$('#verify-form').fadeIn('slow');
             	}
             	else
@@ -123,6 +117,49 @@
         });   
 		e.preventDefault();
 	});
+
+    $("#send-verify-again").click(function(e){        
+        $.ajax({
+            url         : 'postSendVerifyAgain',                                                       
+            type        : 'post',
+            data        : 'data='+1,   
+            beforeSend: function (xhr) {
+                var token = $('meta[name="csrf_token"]').attr('content');
+
+                if (token) {
+                      return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                }
+            },
+            error : function(response)
+            {
+                setTimeout(function(){
+                    $('.form-control').prop('disabled', false);
+                    // sample delay
+                }, 1000);
+                var error = response.responseJSON;
+                var errorHtml = '<ul>';
+                $.each(error, function(key, value){
+                    errorHtml += '<li>' + value[0] + '</li>';
+                });
+                errorHtml += '</ul>';
+                $('#alert-fail').html(errorHtml).fadeIn('slow');
+                grecaptcha.reset();
+            },
+            success : function(response)
+            {                 
+                setTimeout(function(){
+                    setTimeout(function(){
+                        $('#alert-success').fadeOut('slow');
+                    }, 500);
+                }, 1000);
+
+                $('#alert-fail').hide();
+                var successHtml = '<ul><li>Verification code has been sent again to your email address.</li></ul>';
+                $('#alert-success').html(successHtml).fadeIn('slow');
+            }
+        });   
+        e.preventDefault();
+    });
 
 	$("#btnVerify").click(function(e){		
 		var data = new FormData(document.forms.namedItem("verifycodeform"));

@@ -28,7 +28,7 @@
                 <div class="col-md-4 col-xs-4 navigation-padding border-blue">
                   <span id="navigation-badge-3" class="navigation-badge">3</span>
                   &nbsp;
-                  <span id="navigation-font-3" class="navigation-font">Thankyou!</span>
+                  <span id="navigation-font-3" class="navigation-font">Thankyou! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 </div>
               </div>
             </div>

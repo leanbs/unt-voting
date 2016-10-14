@@ -49,7 +49,7 @@ class VoteController extends Controller
     public function getVerifyForm($id)
     {
         $booth = Booth::find($id);
-
+        
         return view('module.vote.verify')
                 ->with('booth', $booth);
     }
@@ -104,6 +104,7 @@ class VoteController extends Controller
                 ];
                 $this->sendEmail($data);
 
+                Session::put('data', $data);
                 Session::put('id_vote', $vote->id_vote);
             
             DB::commit(); 
@@ -131,6 +132,15 @@ class VoteController extends Controller
         return Validator::make($data, [
             'code'                 => 'required',
         ]);      
+    }
+
+    public function postSendVerifyAgain(Request $request)
+    {
+        $data = Session::get('data');
+        $this->sendEmail($data);
+
+        return 'Verification code has been sent again to your email address.';
+                   
     }
 
     public function postVerify(Request $request)
