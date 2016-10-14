@@ -55,3 +55,4 @@ Route::post('modalEditForbiddenEmail', 'AdminController@postModalEditForbidden')
 Route::get('modalDeleteForbiddenEmail/{id}', 'AdminController@getModalDeleteForbiddenEmail');
 Route::post('modalDeleteForbiddenEmail', 'AdminController@postModalDeleteForbiddenEmail');
 Route::get('chartVote', 'AdminController@getChartVote');
+Route::post('postEvent', 'AdminController@postEvent');

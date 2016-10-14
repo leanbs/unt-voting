@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Vote;
 use App\Http\Requests;
 use App\Booth;
+use App\Setting;
 use App\rmdir;
 use App\ForbiddenEmail;
 use Datatables;
@@ -32,7 +33,10 @@ class AdminController extends Controller
      */
     public function cpanel()
     {
-        return view('pages.admin');
+        $setting = SEtting::find(1);
+
+        return view('pages.admin')
+                    ->with('setting', $setting);
     }
     
     public function getModalAddBooth()
@@ -519,4 +523,18 @@ class AdminController extends Controller
 
         return response()->json($result);;
     }  
+
+    public function postEvent(Request $request)
+    {
+        $status = strip_tags($request->status);
+
+        DB::beginTransaction();
+            $setting = Setting::find(1);
+            $setting->status = $status;
+            $setting->save();
+        DB::commit(); 
+
+        return 'setting updated';
+
+    }
 }

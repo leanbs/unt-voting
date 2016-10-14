@@ -17,6 +17,25 @@
             <h2>
                 <i class="fa fa-star"></i>
                 ENTREPRENEURWEEK UNTAR
+                @if ($setting->status == 0)
+                    <a id="btnStartEvent" class="btn btn-success pull-right" style="margin-top: 5px;">
+                        <i class="fa fa-check"></i>
+                        Start Event
+                    </a>
+                    <a id="btnStopEvent" class="btn btn-danger pull-right" style="margin-top: 5px; display: none;">
+                        <i class="fa fa-close"></i>
+                        Stop Event
+                    </a>
+                @else
+                    <a id="btnStartEvent" class="btn btn-success pull-right" style="margin-top: 5px; display: none;">
+                        <i class="fa fa-check"></i>
+                        Start Event
+                    </a>
+                    <a id="btnStopEvent" class="btn btn-danger pull-right" style="margin-top: 5px;">
+                        <i class="fa fa-close"></i>
+                        Stop Event
+                    </a>
+                @endif      
             </h2>       
         </div>                                   
     </div>
@@ -135,6 +154,75 @@
 
 @section('script')
     <script type="text/javascript">
+        $(function(){
+            $("#btnStartEvent").click(function(e){     
+                $('#btnStartEvent').prop('disabled', true);
+                $.ajax({
+                    url         : 'postEvent',                                                       
+                    type        : 'post',
+                    data        : "status="+1,
+                    beforeSend: function (xhr) {
+                        var token = $('meta[name="csrf_token"]').attr('content');
+
+                        if (token) {
+                              return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        }
+                    },
+                    error : function(response)
+                    {
+                        setTimeout(function(){
+                            $('#btnStartEvent').prop('disabled', false);
+                        }, 1000);
+                        alert('terjadi kesalahan, diharapkan untuk melakukan refresh halaman agar dapat melanjutkan');
+                    },
+                    success : function(response)
+                    {
+                        setTimeout(function(){
+                            $('#btnStartEvent').prop('disabled', false);
+                            $('#btnStartEvent').hide();
+                            $('#btnStopEvent').show();
+                        }, 1000);
+                    }
+                });             
+                e.preventDefault();                   
+            }); 
+        });
+
+        $(function(){
+            $("#btnStopEvent").click(function(e){     
+                $('#btnStopEvent').prop('disabled', true);
+                $.ajax({
+                    url         : 'postEvent',                                                       
+                    type        : 'post',
+                    data        : "status="+0,
+                    beforeSend: function (xhr) {
+                        var token = $('meta[name="csrf_token"]').attr('content');
+
+                        if (token) {
+                              return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        }
+                    },
+                    error : function(response)
+                    {
+                        setTimeout(function(){
+                            $('#btnStopEvent').prop('disabled', false);
+                        }, 1000);
+                        alert('terjadi kesalahan, diharapkan untuk melakukan refresh halaman agar dapat melanjutkan');
+                    },
+                    success : function(response)
+                    {
+                        setTimeout(function(){
+                            $('#btnStopEvent').prop('disabled', false);
+                            $('#btnStopEvent').hide();
+                            $('#btnStartEvent').show();
+                        }, 1000);
+                    }
+                });             
+                e.preventDefault();                   
+            }); 
+        });
+
+
         // booth
         $(function(){
             $.ajaxSetup ({

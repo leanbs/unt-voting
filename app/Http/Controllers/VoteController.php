@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Booth;
+use App\Setting;
 use App\Vote;
 use App\ForbiddenEmail;
 use DB;
@@ -36,9 +37,11 @@ class VoteController extends Controller
     public function getVoteForm()
     {
         $booth = Booth::get();
+        $setting = SEtting::find(1);
 
         return view('module.vote.view')
-                ->with('booth', $booth);
+                ->with('booth', $booth)
+                ->with('setting', $setting);
     }
 
     public function postVote(Request $request)
