@@ -7,6 +7,7 @@
     @include('modal.admin.booth.edit.edit')
     @include('modal.admin.booth.delete.delete')
     @include('modal.admin.vote.delete.delete')
+    @include('modal.admin.vote.deleteAll.delete')
     @include('modal.admin.forbiddenEmail.add.add')
     @include('modal.admin.forbiddenEmail.edit.edit')
     @include('modal.admin.forbiddenEmail.delete.delete')
@@ -21,7 +22,7 @@
     </div>
 
     <div class="row row-afandi-ver" style="margin-bottom: 20px;">
-        <div class="col-md-12 col-xs-12">
+        <div id="chart" class="col-md-12 col-xs-12">
             <div class="row row-afandi-ver no-margin">
                 <div class="col col-md-12 col-xs-12" style="border: solid 2px #cccccc;">
                     <div class="row row-afandi-ver no-margin">
@@ -43,10 +44,16 @@
     <div class="row row-afandi-ver" style="margin-bottom: 20px;">
         <div class="col col-md-7 col-xs-12">
             <div class="row row-afandi-ver no-margin">
-                <div class="col-md-12 col-xs-12" style="border: solid 2px #cccccc; padding-bottom: 10px;">
+                <div id="vote" class="col-md-12 col-xs-12" style="border: solid 2px #cccccc; padding-bottom: 10px;">
                     <div class="row row-afandi-ver no-margin">
                         <div class="col-md-12 col-xs-12" style="border-bottom: solid 2px #cccccc; margin-bottom: 10px;">
-                            <h2><i class="fa fa-thumbs-up"></i> VOTE</h2>       
+                            <h2>
+                                <i class="fa fa-thumbs-up"></i> 
+                                VOTE
+                                <a id="btnDeleteAllVote" class="btn btn-danger pull-right" style="margin-top: 5px;">
+                                    <i class="fa fa-plus"></i> Delete Vote
+                                </a>
+                            </h2>       
                         </div>    
                     </div>
                     <div class="row row-afandi-ver no-margin">
@@ -154,6 +161,18 @@
             });
         });  
 
+        // delete vote
+        $(function(){
+            $.ajaxSetup ({
+                cache: false
+            });                         
+            var loadUrl = "modalDeleteAllVote";
+            $("#btnDeleteAllVote").click(function(){
+                $("#modal-body-deleteAllVote").load(loadUrl, function(result){
+                    $("#modalDeleteAllVote").modal({show:true});
+                });
+            });
+        });         
 
         var DataTableBooth = $('#table-booth').DataTable({
             columnDefs: [
@@ -231,6 +250,48 @@
                 ],
             },
         });
+
+        var refresh;
+
+        $('#vote').hover(
+            function(){
+                clearInterval(refresh);
+            },
+            function(){
+                refresh = setInterval(function(){ 
+                    DataTableVote.ajax.reload();    
+                    voteChart.load({
+                        type: 'bar',
+                        url: 'chartVote',
+                        mimeType : 'json', 
+                        keys: {
+                            x: 'Nama',
+                            value: ['Jumlah']
+                        }
+                    }); 
+                }, 3000);
+            }
+        );
+
+        $('#chart').hover(
+            function(){
+                clearInterval(refresh);
+            },
+            function(){
+                refresh = setInterval(function(){ 
+                    DataTableVote.ajax.reload();    
+                    voteChart.load({
+                        type: 'bar',
+                        url: 'chartVote',
+                        mimeType : 'json', 
+                        keys: {
+                            x: 'Nama',
+                            value: ['Jumlah']
+                        }
+                    }); 
+                }, 3000);
+            }
+        );
     </script>
 
 @stop

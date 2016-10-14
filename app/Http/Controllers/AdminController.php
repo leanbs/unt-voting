@@ -321,6 +321,54 @@ class AdminController extends Controller
 
     }
 
+    public function getModalDeleteAllVote()
+    {
+        $result = [];
+        $Vote = Vote::select(
+                        'id_vote as IdVote',
+                        'email as Email'
+                    )
+                    ->where('status', '=', '1')
+                    ->groupBy('Email')
+                    ->get();
+
+        foreach ($Vote as $value) {
+            $extensionEmail = explode("@", $value->Email);
+
+            $result[$extensionEmail[1]] =  $extensionEmail[1];
+        }
+
+        return view('modal.admin.vote.deleteAll.formDelete')
+                    ->with('Extension', $result);
+    } 
+
+    protected function validatorPostModalDeleteAllVote(array $data)
+    {
+        return Validator::make($data, [
+            'ExtensionEmail'             => 'required',
+        ]);      
+    }
+
+    public function postModalDeleteAllVote(Request $request)
+    {
+        $validator = $this->validatorPostModalDeleteAllVote($request->all());
+        if ($validator->fails()) 
+        {
+            $this->throwValidationException($request, $validator);
+        }
+
+        DB::beginTransaction();
+
+            $ExtensionEmail = strip_tags($request->input('ExtensionEmail'));  
+            
+            $Vote = Vote::where('email', 'LIKE', '%'. $ExtensionEmail .'%');
+            $Vote->delete(); 
+
+        DB::commit(); 
+
+        return 'all vote deleted';
+    } 
+
     public function getTableForbidden()
     {
         $forbiddenEmail = ForbiddenEmail::select([

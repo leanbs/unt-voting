@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 //login and register routes
 Route::get('register', 'Auth\AuthController@getRegister');
+Route::post('register', 'Auth\AuthController@postRegister');
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
 Route::get('logout', 'Auth\AuthController@getLogout');
@@ -43,6 +44,8 @@ Route::post('modalDeleteBooth', 'AdminController@postModalDeleteBooth');
 Route::get('tableVote', 'AdminController@getTableVote');
 Route::get('modalDeleteVote/{id}', 'AdminController@getModalDeleteVote');
 Route::post('modalDeleteVote', 'AdminController@postModalDeleteVote');
+Route::get('modalDeleteAllVote', 'AdminController@getModalDeleteAllVote');
+Route::post('modalDeleteAllVote', 'AdminController@postModalDeleteAllVote');
 Route::get('tableForbidden', 'AdminController@getTableForbidden');
 Route::get('modalAddForbidden', 'AdminController@getModalAddForbidden');
 Route::post('modalAddForbidden', 'AdminController@postModalAddForbidden');

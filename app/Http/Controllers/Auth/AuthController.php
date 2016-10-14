@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 
 class AuthController extends Controller
 {
@@ -98,7 +100,7 @@ class AuthController extends Controller
                 $error,
             ]);
         } else {
-            return redirect($this->loginPath)
+            return redirect()->route('login')
                 ->with('status', 'Your account has been created.');
         }
     }
