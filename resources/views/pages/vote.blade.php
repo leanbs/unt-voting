@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('page-content')
+<div id="fb-root"></div>
 
     <div class="container">
 
@@ -54,12 +55,17 @@
             <a href="#" class="list-group-item">Link</a>
           </div>
         </div><!--/.sidebar-offcanvas-->
-      </div><!--/row-->
+          </div><!--/row-->
 
-      <hr>
+          <hr>
+          <div class="fb-share-button" data-href="http://www.entrepreneurweekuntar.com/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.entrepreneurweekuntar.com%2F&amp;src=sdkpreparse">Share</a></div>
 
+          <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-url="http://www.entrepreneurweekuntar.com/" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+          <div class="g-plus" data-action="share" data-annotation="none" data-height="26" data-href="http://www.entrepreneurweekuntar.com/"></div>
       <footer>
         <p>&copy; 2016 Company, Inc.</p>
+
       </footer>
 
     </div><!--/.container-->
@@ -77,5 +83,7 @@
     $("#vote").load(loadUrl);
   });  
 </script>
-    
+
+<!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5801fc5c83c49492"></script> 
+
 @stop

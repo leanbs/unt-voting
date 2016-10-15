@@ -44,6 +44,7 @@
     <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     {{-- <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script> --}}
 
     @yield('script')
