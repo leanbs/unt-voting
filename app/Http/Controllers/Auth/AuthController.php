@@ -30,6 +30,13 @@ class AuthController extends Controller
      *
      * @var string
      */
+    protected $loginPath = '/login';
+
+    /**
+     * Where to redirect users after login / registration.
+     *
+     * @var string
+     */
     protected $redirectTo = '/cpanel';
 
     /**
@@ -94,14 +101,8 @@ class AuthController extends Controller
         $validator = $this->validator($request->all());
         if ($validator->fails()) {
             $this->throwValidationException($request, $validator);
-        }
-        if (! empty($error = $this->create($request->all()))) {
-            return redirect()->back()->withErrors([
-                $error,
-            ]);
-        } else {
-            return redirect()->route('login')
-                ->with('status', 'Your account has been created.');
-        }
+        } 
+        return redirect('/login')
+           ->with('status', 'Your account has been created.');
     }
 }
