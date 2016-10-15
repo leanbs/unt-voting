@@ -80,6 +80,7 @@
                             <thead style="color: rgba(186, 0, 0, 1);">
                                 <tr>
                                     <th class="text-center col-xs-3 col-md-3">Nama Booth</th>
+                                    <th class="text-center col-xs-3 col-md-3">Alamat ip</th>
                                     <th class="text-center col-xs-4 col-md-4">Email</th>
                                     <th class="text-center col-xs-3 col-md-3">Tanggal / Waktu</th>
                                     <th class="text-center col-xs-2 col-md-2">Pengaturan</th>
@@ -293,6 +294,7 @@
             ajax: '{{ url('tableVote') }}',
             columns: [
                 { 'data': 'NamaBrand', 'name': 'booth.nama_produk' },
+                { 'data': 'AlamatIP', 'name': 'vote.ip_addr' },
                 { 'data': 'Email', 'name': 'vote.email' },
                 { 'data': 'Tanggal', 'name': 'vote.updated_at' },
                 { 'data': 'Pengaturan', 'name': 'Pengaturan', 'orderable': false, 'searchable': false },

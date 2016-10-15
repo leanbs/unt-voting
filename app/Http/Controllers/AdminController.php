@@ -275,6 +275,7 @@ class AdminController extends Controller
                     ->select([
                         'vote.id_vote as IdVote',
                         'booth.nama_produk as NamaBrand',
+                        'vote.ip_addr as AlamatIP',
                         'vote.email as Email',
                         'vote.updated_at as Tanggal',      
                     ]);
