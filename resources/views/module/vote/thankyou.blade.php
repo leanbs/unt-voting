@@ -5,7 +5,7 @@
 				<div class="col-md-12 col-xs-12 text-center">
 					<b class="color-blue" style="font-size: 30px;">Your vote has been submitted successfully.</b> 
 					<br>
-					<span style="font-size: 20px;">Thankyou for the vote :).</span>
+					<p> Thanks for participating :) </p>
 				</div>
 			</div>
 		</div>		
