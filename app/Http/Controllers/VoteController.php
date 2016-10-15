@@ -37,7 +37,7 @@ class VoteController extends Controller
     public function getVoteForm()
     {
         $booth = Booth::get();
-        $setting = SEtting::find(1);
+        $setting = Setting::find(1);
 
         return view('module.vote.view')
                 ->with('booth', $booth)
