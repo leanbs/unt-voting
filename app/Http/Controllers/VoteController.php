@@ -78,12 +78,6 @@ class VoteController extends Controller
         $extensionEmail = explode("@", $email);
         $error = [];
         $ip = $request->ip();
-        // $ip = $request->getClientIp();
-
-        // $ip = $_SERVER['REMOTE_ADDR'];
-        // if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
-        //     $ip = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
-        // }
 
         $forbiddenEmail = ForbiddenEmail::where('forbidden_email', '=', $extensionEmail[1])->first();
 
