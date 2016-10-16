@@ -4,11 +4,8 @@
 <div id="fb-root"></div>
 
     <div class="container">
-
       <div class="row row-offcanvas row-offcanvas-right">
-
         <div class="col-md-12 col-xs-12 col-sm-9">
-         
             <img class="img-responsive center-block" src="https://static.wixstatic.com/media/fbd849_badfa26e07fb44e3baac50c9a4226a1a.png/v1/fill/w_368,h_267,al_c,usm_0.66_1.00_0.01/fbd849_badfa26e07fb44e3baac50c9a4226a1a.png">
 
             <div class="row">
@@ -16,17 +13,17 @@
                 <div class="col-md-4 col-xs-4 navigation-padding border-blue">
                   <span class="navigation-badge navigation-badge-active">1</span>
                   &nbsp;
-                  <span class="navigation-font navigation-font-active">Select the booth</span>
+                  <span class="navigation-font navigation-font-active">Select</span>
                 </div>
                 <div class="col-md-4 col-xs-4 navigation-padding border-blue border-left-none border-right-none">
                   <span id="navigation-badge-2" class="navigation-badge">2</span>
                   &nbsp;
-                  <span id="navigation-font-2" class="navigation-font">Are you human?</span>
+                  <span id="navigation-font-2" class="navigation-font">Verify</span>
                 </div>
                 <div class="col-md-4 col-xs-4 navigation-padding border-blue">
                   <span id="navigation-badge-3" class="navigation-badge">3</span>
                   &nbsp;
-                  <span id="navigation-font-3" class="navigation-font">Thankyou! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span id="navigation-font-3" class="navigation-font">Thanks</span>
                 </div>
               </div>
             </div>

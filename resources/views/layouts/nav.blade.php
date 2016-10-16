@@ -14,6 +14,7 @@
             <li class="active"><a href="{{ url('/') }}">Home</a></li>
             <li><a href="{{ url('/') }}">Vote</a></li>
             <li><a href="{{ url('/cpanel') }}">Cpanel</a></li>
+            <li><a href="{{ url('/logout') }}">Logout</a></li>
           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->

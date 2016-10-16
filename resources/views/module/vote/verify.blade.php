@@ -2,15 +2,15 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-12 border-blue border-top-none padding-top-15" style="padding-bottom: 15px;">
 			<div class="row">
-				<div class="col-md-4 col-xs-4">
+				<div class="col-md-4 col-xs-12">
 					<div class="row" style="margin-bottom: 5px;">
 						<div class="col-md-12">
 							<b style="font-size: 14px;">You're voting : {{ $booth->nama_produk }}</b>
 						</div>						
 					</div>
 					<div class="row">
-						<div class="col-md-12">
-							<img src="{{ $booth->directory_logo .'/'. $booth->logo_name }}" alt="..." width="200">	
+						<div class="col-md-12 col-xs-8">
+							<img src="{{ $booth->directory_logo .'/'. $booth->logo_name }}" alt="{{$booth->logo_name}}" >	
 						</div>								
 					</div>
 				</div>

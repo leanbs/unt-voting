@@ -20,7 +20,7 @@
 					                      	<h4 class="">{{ $value->nama_produk }}</h4>
 					                      	<p class="">{{ $value->deskripsi_produk }}</p>
 					                  	</div>
-					                  	<img src="{{ $value->directory_logo .'/'. $value->logo_name }}" alt="..." class="" width=200px height=200px>
+					                  	<img src="{{ $value->directory_logo .'/'. $value->logo_name }}" alt="{{$value->logo_name}}" class="img-responsive">
 									</a>
 								</div>
 							</div>
