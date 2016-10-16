@@ -16,7 +16,7 @@
                 <div class="col-md-4 col-xs-4 navigation-padding border-blue">
                   <span class="navigation-badge navigation-badge-active">1</span>
                   &nbsp;
-                  <span class="navigation-font navigation-font-active">Select the booth</span>
+                  <span class="navigation-font navigation-font-active">Select the booth &nbsp;&nbsp;</span>
                 </div>
                 <div class="col-md-4 col-xs-4 navigation-padding border-blue border-left-none border-right-none">
                   <span id="navigation-badge-2" class="navigation-badge">2</span>
@@ -26,7 +26,7 @@
                 <div class="col-md-4 col-xs-4 navigation-padding border-blue">
                   <span id="navigation-badge-3" class="navigation-badge">3</span>
                   &nbsp;
-                  <span id="navigation-font-3" class="navigation-font">Thankyou! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span id="navigation-font-3" class="navigation-font">Thankyou! &nbsp;&nbsp;</span>
                 </div>
               </div>
             </div>
