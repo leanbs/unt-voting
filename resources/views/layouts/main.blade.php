@@ -35,17 +35,17 @@
     <script src="{{ asset('assets/js2/bootstrap.min.js') }}"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
 
     <script src="{{ asset('assets/js2/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('assets/js2/c3.min.js') }}"></script>
     <script src="{{ asset('assets/js2/d3.min.js') }}"></script>
     <script src="{{ asset('assets/js2/script.js') }}"></script>  
-    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    {{-- <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script> --}}
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 
     @yield('script')
 
