@@ -12,7 +12,7 @@
     @include('modal.admin.forbiddenEmail.edit.edit')
     @include('modal.admin.forbiddenEmail.delete.delete')
 
-    <div class="row row-afandi-ver" style="margin-bottom: 20px; margin-top: -90px;">
+    <div class="row row-afandi-ver" style="margin-bottom: 20px;">
         <div class="col-md-12 col-xs-12" style="border-bottom: solid 2px #cccccc; margin-bottom: 10px;">
             <h2>
                 <i class="fa fa-star"></i>
@@ -69,9 +69,9 @@
                             <h2>
                                 <i class="fa fa-thumbs-up"></i> 
                                 VOTE
-                                <a id="btnDeleteAllVote" class="btn btn-danger pull-right" style="margin-top: 5px;">
+                                {{-- <a id="btnDeleteAllVote" class="btn btn-danger pull-right" style="margin-top: 5px;">
                                     <i class="fa fa-trash"></i> Delete Vote
-                                </a>
+                                </a> --}}
                             </h2>       
                         </div>    
                     </div>
@@ -81,9 +81,9 @@
                                 <tr>
                                     <th class="text-center col-xs-3 col-md-3">Nama Booth</th>
                                     <th class="text-center col-xs-3 col-md-3">Alamat ip</th>
-                                    <th class="text-center col-xs-4 col-md-4">Email</th>
+                                    <th class="text-center col-xs-3 col-md-3">Email</th>
                                     <th class="text-center col-xs-3 col-md-3">Tanggal / Waktu</th>
-                                    <th class="text-center col-xs-2 col-md-2">Pengaturan</th>
+                                    {{-- <th class="text-center col-xs-2 col-md-2">Pengaturan</th> --}}
                                 </tr>
                             </thead>
                         </table>  
@@ -297,7 +297,7 @@
                 { 'data': 'AlamatIP', 'name': 'vote.ip_addr' },
                 { 'data': 'Email', 'name': 'vote.email' },
                 { 'data': 'Tanggal', 'name': 'vote.updated_at' },
-                { 'data': 'Pengaturan', 'name': 'Pengaturan', 'orderable': false, 'searchable': false },
+                // { 'data': 'Pengaturan', 'name': 'Pengaturan', 'orderable': false, 'searchable': false },
             ]
         });
 
