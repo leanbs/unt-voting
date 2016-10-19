@@ -12,7 +12,8 @@
         "yajra/laravel-datatables-oracle": "^6.16",
         "barryvdh/laravel-debugbar": "^2.0",
         "greggilbert/recaptcha": "dev-master",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "laravel/socialite": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

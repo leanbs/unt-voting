@@ -30,7 +30,13 @@ Route::get('verifyForm/{id}', 'VoteController@getVerifyForm');
 Route::post('postEmail', 'VoteController@postEmail');
 Route::post('postSendVerifyAgain', 'VoteController@postSendVerifyAgain');
 Route::post('postVerify', 'VoteController@postVerify');
+Route::get('activeVote/{vote}', 'VoteController@getVerify');
 Route::get('thankyouForm', 'VoteController@getThankyouForm');
+Route::get('redirect/facebook', 'VoteController@redirectToFacebook');
+Route::get('vote-facebook/callback', 'VoteController@handleFacebookCallback');
+// Route::get('sorryVoteTwitter', 'VoteController@getSorryVoteTwitter');
+// Route::get('redirect/twitter', 'VoteController@redirectToTwitter');
+// Route::get('vote-twitter/callback', 'VoteController@handleTwitterCallback');
 
 //admin routes
 Route::get('cpanel', 'AdminController@cpanel');

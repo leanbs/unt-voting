@@ -13,7 +13,7 @@
     @include('modal.admin.forbiddenEmail.delete.delete')
 
     <div class="row row-afandi-ver" style="margin-bottom: 20px;">
-        <div class="col-md-12 col-xs-12" style="border-bottom: solid 2px #cccccc; margin-bottom: 10px;">
+        <div class="col-md-12 col-xs-12" style="border-bottom: solid 2px #cccccc; margin-bottom: 10px; margin-top: 70px;">
             <h2>
                 <i class="fa fa-star"></i>
                 ENTREPRENEURWEEK UNTAR
@@ -79,10 +79,11 @@
                         <table class="table table-bordered table-hover table-striped" id="table-vote">
                             <thead style="color: rgba(186, 0, 0, 1);">
                                 <tr>
-                                    <th class="text-center col-xs-3 col-md-3">Nama Booth</th>
-                                    <th class="text-center col-xs-3 col-md-3">Alamat ip</th>
-                                    <th class="text-center col-xs-3 col-md-3">Email</th>
-                                    <th class="text-center col-xs-3 col-md-3">Tanggal / Waktu</th>
+                                    <th class="text-center col-xs-2 col-md-2">Nama Booth</th>
+                                    <th class="text-center col-xs-2 col-md-2">Alamat ip</th>
+                                    <th class="text-center col-xs-2 col-md-2">Id Facebook</th>
+                                    <th class="text-center col-xs-2 col-md-3">Email</th>
+                                    <th class="text-center col-xs-2 col-md-3">Tanggal / Waktu</th>
                                     {{-- <th class="text-center col-xs-2 col-md-2">Pengaturan</th> --}}
                                 </tr>
                             </thead>
@@ -286,7 +287,7 @@
             columnDefs: [
                 {
                     'className' : 'text-center text-nowrap',
-                    'targets'   : [ 2, -1],
+                    'targets'   : [ 2 ],
                 },
             ],
             processing: true,
@@ -295,6 +296,7 @@
             columns: [
                 { 'data': 'NamaBrand', 'name': 'booth.nama_produk' },
                 { 'data': 'AlamatIP', 'name': 'vote.ip_addr' },
+                { 'data': 'IdFacebook', 'name': 'vote.id_facebook' },
                 { 'data': 'Email', 'name': 'vote.email' },
                 { 'data': 'Tanggal', 'name': 'vote.updated_at' },
                 // { 'data': 'Pengaturan', 'name': 'Pengaturan', 'orderable': false, 'searchable': false },

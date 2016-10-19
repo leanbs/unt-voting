@@ -10,7 +10,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-xs-8">
-							<img src="{{ $booth->directory_logo .'/'. $booth->logo_name }}" alt="{{$booth->logo_name}}" >	
+							<img src="{{ $booth->directory_logo .'/'. $booth->logo_name }}" alt="{{$booth->logo_name}}" width="170">	
 						</div>								
 					</div>
 				</div>
@@ -20,26 +20,43 @@
 
 					<div id="email-form">
 						{!! Form::open(['url' => 'postEmail', 'method' => 'post', 'name' =>'emailform']) !!}
-						    <div class="form-group">
-						        {!! Form::label('email', 'Email') !!}
-						        {!! Form::email('email', null, [
-						            'class'         => 'form-control',
-						            'placeholder'   => 'ex: email@mail.com'
-						        ]) !!}
-						    </div>
+                            <div class="row">
+                                <div class="col-md-12 col-xs-12">
+                                    <a href="redirect/facebook" class="btn btn-primary btn-md btn-block"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Vote with Facebook</a>
+                                </div>
+                                {{-- <div class="col-md-6 col-xs-12">
+                                    <a href="redirect/twitter" class="btn btn-info btn-md btn-block"><i class="fa fa-twitter"></i>&nbsp;&nbsp;Vote with Twitter</a>
+                                </div> --}}
+                            </div>
+                            <div class="row" style="margin: 10px 0 10px 0;">
+                                <div class="col-md-12 col-xs-12 text-center">
+                                    OR
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-xs-12">
+                                    <div class="form-group">
+                                        {!! Form::label('email', 'Vote Using Your Email Address') !!}
+                                        {!! Form::email('email', null, [
+                                            'class'         => 'form-control',
+                                            'placeholder'   => 'ex: email@mail.com'
+                                        ]) !!}
+                                    </div>
 
-						    <div class="form-group">
-				               	{!! Recaptcha::render() !!}
-				            </div>
+                                    <div class="form-group">
+                                        {!! Recaptcha::render() !!}
+                                    </div>
 
-					        <div class="form-group">
-					            {!! Form::submit('Send', ['id' => 'btnSend', 'class' => 'btn btn-primary']) !!}
-					        </div>     
-						{!! Form::close() !!}
+                                    <div class="form-group">
+                                        {!! Form::submit('Send', ['id' => 'btnSend', 'class' => 'btn btn-primary']) !!}
+                                    </div>     
+                                </div>
+                            </div>    						    
+						{!! Form::close() !!}       
 					</div>
 					<div id="verify-form" style="display: none;">
 						<span>still not receiving the verification code? 
-                            <a id="send-verify-again" style="text-decoration: none; color: #4dc3ff;">click here</a>
+                            <a id="send-verify-again" style="text-decoration: none;">click here</a>
                         </span>
 						{!! Form::open(['url' => 'verifyCode', 'method' => 'post', 'name' =>'verifycodeform']) !!}
 						    <div class="form-group">
@@ -93,24 +110,28 @@
                 });
                 errorHtml += '</ul>';
                 $('#alert-fail').html(errorHtml).fadeIn('slow');
+                $('.form-control').val('');
                 grecaptcha.reset();
             },
             success : function(response)
             { 
             	if (response == 'success') 
             	{
-            		$('#alert-fail').hide();
-            		$('#email-form').hide();
+                    grecaptcha.reset();
+                    $('#alert-fail').hide();
+                    $('#email-form').hide();
                     $('.form-control').prop('disabled', false);
-            		$('#verify-form').fadeIn('slow');
+                    $('#verify-form').show();           		
             	}
             	else
             	{
             		setTimeout(function(){
             			$('.form-control').prop('disabled', false);                        
                     }, 1000);
+                    $('.form-control').val('');
             		var errorHtml = '<ul><li>' + response + '</li></ul>';
             		$('#alert-fail').html(errorHtml).fadeIn('slow');
+                    grecaptcha.reset();
             	}
             	
             }
