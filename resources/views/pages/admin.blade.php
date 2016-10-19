@@ -12,7 +12,7 @@
     @include('modal.admin.forbiddenEmail.edit.edit')
     @include('modal.admin.forbiddenEmail.delete.delete')
 
-    <div class="row row-afandi-ver" style="margin-bottom: 20px; margin-top: -90px;">
+    <div class="row row-afandi-ver" style="margin-bottom: 20px; margin-top: 50px;">
         <div class="col-md-12 col-xs-12" style="border-bottom: solid 2px #cccccc; margin-bottom: 10px;">
             <h2>
                 <i class="fa fa-star"></i>
@@ -40,7 +40,7 @@
         </div>                                   
     </div>
 
-    <div class="row row-afandi-ver" style="margin-bottom: 20px;">
+    <div class="row row-afandi-ver" style="margin-top: 20px;">
         <div id="chart" class="col-md-12 col-xs-12">
             <div class="row row-afandi-ver no-margin">
                 <div class="col col-md-12 col-xs-12" style="border: solid 2px #cccccc;">
