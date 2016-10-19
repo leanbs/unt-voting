@@ -12,5 +12,8 @@ unt-voting adalah website voting online untar Entrepreneurship Week 9.
 
 ## Contributors
 
-- 535130044
-- 535130045
+- Nico A.
+- Davin I.
+- Bryan A.
+- Jonathan P.
+- Willy.

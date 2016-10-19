@@ -58,6 +58,10 @@
 	                      return xhr.setRequestHeader('X-CSRF-TOKEN', token);
 	                }
 	            },
+	            error : function(response)
+	            {
+	                alert('Unexpected error occurred, please refresh page & retry.');
+	            },
 	            success : function(response)
 	            { 
 	            	var loadUrl = "verifyForm/"+response;         

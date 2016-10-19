@@ -20,6 +20,8 @@ class Vote extends Model
      * @var array
      */
     protected $fillable = [
+        'id_facebook',
+        'nama_facebook',
         'email',
         'vote_code',
         'status',

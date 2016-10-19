@@ -276,31 +276,32 @@ class AdminController extends Controller
                         'vote.id_vote as IdVote',
                         'booth.nama_produk as NamaBrand',
                         'vote.ip_addr as AlamatIP',
+                        'vote.id_facebook as IdFacebook',
                         'vote.email as Email',
                         'vote.updated_at as Tanggal',      
                     ]);
 
         return Datatables::of($vote)
-            ->addColumn('Pengaturan', function ($votes) {
-                return
-                    '<a id="delete-vote-'. $votes->IdVote .'" style="color: red; text-decoration: none; cursor: pointer;"><i class="fa fa-trash-o"></i> Delete</a>
+            // ->addColumn('Pengaturan', function ($votes) {
+            //     return
+            //         '<a id="delete-vote-'. $votes->IdVote .'" style="color: red; text-decoration: none; cursor: pointer;"><i class="fa fa-trash-o"></i> Delete</a>
 
-                    <script type="text/javascript">
-                        // delete
-                        $(function(){
-                            $.ajaxSetup ({
-                                cache: false
-                            });
-                            var id = "'. $votes->IdVote .'";                           
-                            var loadUrl = "modalDeleteVote/"+id;   
-                            $("#delete-vote-"+id).click(function(){
-                                $("#modal-body-deleteVote").load(loadUrl, function(result){
-                                    $("#modalDeleteVote").modal({show:true});
-                                });
-                            });
-                        });
-                    </script>';
-            })
+            //         <script type="text/javascript">
+            //             // delete
+            //             $(function(){
+            //                 $.ajaxSetup ({
+            //                     cache: false
+            //                 });
+            //                 var id = "'. $votes->IdVote .'";                           
+            //                 var loadUrl = "modalDeleteVote/"+id;   
+            //                 $("#delete-vote-"+id).click(function(){
+            //                     $("#modal-body-deleteVote").load(loadUrl, function(result){
+            //                         $("#modalDeleteVote").modal({show:true});
+            //                     });
+            //                 });
+            //             });
+            //         </script>';
+            // })
             ->removeColumn('IdVote')
             ->make(true);
     }

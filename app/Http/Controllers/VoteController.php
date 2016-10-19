@@ -14,6 +14,7 @@ use Validator;
 use Session;
 use Mail;
 use Recaptcha;
+use Socialite;
 
 class VoteController extends Controller
 {
@@ -46,12 +47,17 @@ class VoteController extends Controller
 
     public function postVote(Request $request)
     {
+        $ip = $request->ip();
+        Session::put('ip', $ip);
         return $request->id;
     }
 
     public function getVerifyForm($id)
     {
+        $id = strip_tags($id);
         $booth = Booth::find($id);
+        Session::put('id_booth', $id);
+
         
         return view('module.vote.verify')
                 ->with('booth', $booth);
@@ -60,7 +66,7 @@ class VoteController extends Controller
     protected function validatorPostEmail(array $data)
     {
         return Validator::make($data, [
-            'email'                 => 'required|email|unique:vote,email',
+            'email'                 => 'required|email|unique:vote,email,null,null,status,1',
             'g-recaptcha-response'  => 'required|recaptcha',
         ]);      
     }
@@ -80,31 +86,57 @@ class VoteController extends Controller
         $ip = $request->ip();
 
         $forbiddenEmail = ForbiddenEmail::where('forbidden_email', '=', $extensionEmail[1])->first();
+        $checkVote = Vote::where('email', '=', $email)->first();
 
         if (empty($forbiddenEmail)) 
         {
-            DB::beginTransaction();
+            if (!empty($checkVote)) 
+            {
+                DB::beginTransaction();
 
-                $voteCode = str_random(7);
+                    $voteCode = str_random(7);
 
-                $vote = new Vote ([
-                    'email'             => $email,
-                    'vote_code'         => $voteCode,
-                    'ip_addr'           => $ip
-                ]);
-                $vote->booth()->associate($id);
-                $vote->save();
+                    $checkVote->vote_code = $voteCode;
+                    $checkVote->ip_addr = $ip;
+                    $checkVote->id_booth = $id;
+                    $checkVote->save();
 
-                $data = [
-                    'email'             => $email,
-                    'vote_code'         => $voteCode
-                ];
-                $this->sendEmail($data);
+                    $data = [
+                        'email'             => $email,
+                        'vote_code'         => $voteCode
+                    ];                    
 
+                DB::commit();  
                 Session::put('data', $data);
-                Session::put('id_vote', $vote->id_vote);
-            
-            DB::commit(); 
+                Session::put('id_vote', $checkVote->id_vote);
+                $this->sendEmail($data);
+                
+            }
+            else
+            {
+               DB::beginTransaction();
+
+                    $voteCode = str_random(7);
+
+                    $vote = new Vote ([
+                        'email'             => $email,
+                        'vote_code'         => $voteCode,
+                        'ip_addr'           => $ip
+                    ]);
+                    $vote->booth()->associate($id);
+                    $vote->save();
+
+                    $data = [
+                        'email'             => $email,
+                        'vote_code'         => $voteCode
+                    ];     
+                
+                DB::commit(); 
+                Session::put('data', $data);
+                Session::put('id_vote', $checkVote->id_vote); 
+                $this->sendEmail($data);   
+                  
+            }          
 
             return 'success';
         }
@@ -138,6 +170,29 @@ class VoteController extends Controller
 
         return 'Verification code has been sent again to your email address.';
                    
+    }
+
+    public function getVerify($vote)
+    {       
+        $id = Session::get('id_vote');
+        $code = strip_tags($vote);        
+
+        $vote = Vote::find($id);
+
+        if ($vote->vote_code == $code) 
+        {                
+            DB::beginTransaction();
+                $vote->status = 1;                
+                $vote->save();
+
+                $message = 'success'; 
+            DB::commit();  
+
+            $message = '<b class="color-blue" style="font-size: 30px;">Your vote has been submitted successfully.</b><br><p> Thanks for participating :) </p>';
+
+            return view('module.vote.message')
+                ->with('message', $message); 
+        }          
     }
 
     public function postVerify(Request $request)
@@ -178,4 +233,78 @@ class VoteController extends Controller
         return view('module.vote.thankyou');
     }
 
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+        $idFacebook = $user->getId();
+        $namaFacebook = $user->getName();
+        $email = $user->getEmail();
+        $id = Session::get('id_booth');
+        $ip = Session::get('ip');        
+
+        if (!empty($email)) 
+        {
+            $checkVote = Vote::where('email', '=', $email)->first();
+
+            if (!empty($checkVote)) 
+            {
+                if ($checkVote->status == 1) 
+                {
+                    $message = '<b class="color-blue" style="font-size: 30px;">Sorry, your facebook account has been used.</b><br><p> Thanks for participating :) </p>';
+                    
+                    return view('module.vote.message')
+                        ->with('message', $message);  
+                }
+                else
+                {
+                    DB::beginTransaction();
+
+                        $vote = Vote::where('email', '=', $email)->first();
+                        $vote->id_booth = $id;
+                        $vote->status = 1;
+                        $vote->ip_addr = $ip;
+                        $vote->save();
+
+                    DB::commit();  
+
+                    $message = '<b class="color-blue" style="font-size: 30px;">Your vote has been submitted successfully.</b><br><p> Thanks for participating :) </p>';
+
+                    return view('module.vote.message')
+                        ->with('message', $message);     
+                }            
+            }
+            else
+            {
+                DB::beginTransaction();
+
+                    $vote = new Vote ([
+                                'id_facebook'       => $idFacebook,
+                                'nama_facebook'     => $namaFacebook,
+                                'email'             => $email,
+                                'status'            => 1,
+                                'ip_addr'           => $ip
+                            ]);
+                    $vote->booth()->associate($id);
+                    $vote->save();
+
+                DB::commit();  
+                $message = '<b class="color-blue" style="font-size: 30px;">Your vote has been submitted successfully.</b><br><p> Thanks for participating :) </p>';
+
+                return view('module.vote.message')
+                    ->with('message', $message);  
+            }       
+        }  
+        else
+        {
+            $message = '<b class="color-blue" style="font-size: 30px;">Sorry, this account cannot be used to vote your favorite booth.</b><br><p>Please put your email address to your account first and try again.</p>';
+
+            return view('module.vote.message')
+                    ->with('message', $message);  
+        }                     
+    }
 }
