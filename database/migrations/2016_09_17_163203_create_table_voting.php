@@ -21,6 +21,8 @@ class CreateTableVoting extends Migration
         Schema::create('vote', function (Blueprint $table) {
             $table->increments('id_vote');
             $table->unsignedInteger('id_booth');
+            $table->string('id_facebook');
+            $table->string('nama_facebook');
             $table->string('email');
             $table->string('vote_code');
             $table->tinyInteger('status')->default(0);
