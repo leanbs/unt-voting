@@ -60,7 +60,7 @@
         </div>                            
     </div>
 
-    <div class="row row-afandi-ver" style="margin-bottom: 20px;">
+    <div class="row row-afandi-ver" style="margin-bottom: 20px; margin-top: 25px;">
         <div class="col col-md-7 col-xs-12">
             <div class="row row-afandi-ver no-margin">
                 <div id="vote" class="col-md-12 col-xs-12" style="border: solid 2px #cccccc; padding-bottom: 10px;">
