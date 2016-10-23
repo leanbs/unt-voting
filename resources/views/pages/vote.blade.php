@@ -101,10 +101,7 @@
       }
   ); 
 
-  var setting = {{ $setting->status }};
-
-  if (setting == 1 ) 
-  {
+  @if ($setting->status == 1)
     function vote(id) {
       $("#loading").show();
       $("#voteForm").hide();
@@ -131,15 +128,13 @@
                 $("#navigation-font-2").addClass('navigation-font-active');
               });
           }
-      });                    
+      }); 
     }
-  }
-  else
-  {
+  @else
     function vote(id) {
       alert('Voting online currently unavailable.');      
     }
-  }
+  @endif
   
 
   // $(function(){                      
