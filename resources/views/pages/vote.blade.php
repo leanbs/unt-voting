@@ -27,35 +27,40 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div class="row">              
               <div id="vote">
                   <div class="col-md-12 col-xs-12" style="padding: 0 45px 0 45px;">
                     <div class="row">
                       <div class="col-xs-12 col-md-12 border-blue border-top-none padding-top-15">
-                        @foreach ($booth->chunk(4) as $valueChunk)
-                          <div class="row">
-                            @foreach ($valueChunk as $value)
-                              <div class="col-md-3 col-xs-6">
-                                <div class="thumbnail">   
-                                  <a id="team-{{ $value->id_booth }}">
-                                    <div class="caption">
-                                        <h4 class="">{{ $value->nama_produk }}</h4>
-                                        <p class="">{{ $value->deskripsi_produk }}</p>
-                                    </div>
-                                    <img src="{{ $value->directory_logo .'/'. $value->logo_name }}" alt="{{$value->logo_name}}" class="img-responsive">
-                                  </a>
+                        <div id="loading" class="loading color-blue text-center">
+                          <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+                        </div>
+                        <div id="voteForm">
+                          @foreach ($booth->chunk(4) as $valueChunk)
+                            <div class="row">
+                              @foreach ($valueChunk as $value)
+                                <div class="col-md-3 col-xs-6">
+                                  <div class="thumbnail">   
+                                    <a id="team-{{ $value->id_booth }}">
+                                      <div class="caption">
+                                          <h4 class="">{{ $value->nama_produk }}</h4>
+                                          <p class="">{{ $value->deskripsi_produk }}</p>
+                                      </div>
+                                      <img src="{{ $value->directory_logo .'/'. $value->logo_name }}" alt="{{$value->logo_name}}" class="img-responsive">
+                                    </a>
+                                  </div>
                                 </div>
-                              </div>
-                              <script src="{{ asset('assets/js2/jquery.min.js') }}"></script>
-                              <script type="text/javascript">
-                                $("#team-{{ $value->id_booth }}").click(function(e){
-                                  vote({{ $value->id_booth }});
-                                  e.preventDefault();
-                                }); 
-                              </script>
-                            @endforeach
-                          </div>
-                        @endforeach
+                                <script src="{{ asset('assets/js2/jquery.min.js') }}"></script>
+                                <script type="text/javascript">
+                                  $("#team-{{ $value->id_booth }}").click(function(e){
+                                    vote({{ $value->id_booth }});
+                                    e.preventDefault();
+                                  }); 
+                                </script>
+                              @endforeach
+                            </div>
+                          @endforeach
+                        </div>                          
                       </div>    
                     </div>  
                   </div>
@@ -101,6 +106,8 @@
   if (setting == 1 ) 
   {
     function vote(id) {
+      $("#loading").show();
+      $("#voteForm").hide();
       $.ajax({
           url         : 'postVote',                                                       
           type        : 'post',
@@ -119,6 +126,7 @@
           { 
             var loadUrl = "verifyForm/"+response;         
               $("#vote").load(loadUrl, function(result){
+                $("#loading").hide();
                 $("#navigation-badge-2").addClass('navigation-badge-active');
                 $("#navigation-font-2").addClass('navigation-font-active');
               });

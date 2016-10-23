@@ -15,6 +15,9 @@
 					</div>
 				</div>
 				<div class="col-md-8 col-xs-8">
+                    <div id="loading" class="loading color-blue text-center">
+                        <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+                    </div>
 					<div id="alert-success" class="alert alert-success alert-dismissable" hidden role="alert"></div>
 					<div id="alert-fail" class="alert alert-danger alert-dismissable" hidden role="alert"></div>
 
@@ -57,6 +60,9 @@
 					<div id="verify-form" style="display: none;">
 						<span>still not receiving the verification code? 
                             <a id="send-verify-again" style="text-decoration: none;">click here</a>
+                            <div id="loading1" class="loading color-blue text-center">
+                                <i class="fa fa-spinner fa-pulse fa-fw"></i>
+                            </div>
                         </span>
 						{!! Form::open(['url' => 'verifyCode', 'method' => 'post', 'name' =>'verifycodeform']) !!}
 						    <div class="form-group">
@@ -86,11 +92,12 @@
 	//     }
 	// });
 
-	$("#btnSend").click(function(e){		
+	$("#btnSend").click(function(e){	
+        $('#email-form').hide();
+        $("#loading").show();
 		var data = new FormData(document.forms.namedItem("emailform"));
         var id = {{ $booth->id_booth }};
         data.append('id', id);
-        $('.form-control').prop('disabled', true);
 		$.ajax({
             url         : 'postEmail',                                                       
             type        : 'post',
@@ -99,10 +106,8 @@
             processData : false,
             error : function(response)
             {
-                setTimeout(function(){
-                    $('.form-control').prop('disabled', false);
-                    // sample delay
-                }, 1000);
+                $("#loading").hide();
+                $('#email-form').show();
                 var error = response.responseJSON;
                 var errorHtml = '<ul>';
                 $.each(error, function(key, value){
@@ -119,15 +124,13 @@
             	{
                     grecaptcha.reset();
                     $('#alert-fail').hide();
-                    $('#email-form').hide();
-                    $('.form-control').prop('disabled', false);
+                    $("#loading").hide();
                     $('#verify-form').show();           		
             	}
             	else
             	{
-            		setTimeout(function(){
-            			$('.form-control').prop('disabled', false);                        
-                    }, 1000);
+                    $("#loading").hide();
+                    $('#email-form').show();
                     $('.form-control').val('');
             		var errorHtml = '<ul><li>' + response + '</li></ul>';
             		$('#alert-fail').html(errorHtml).fadeIn('slow');
@@ -139,7 +142,9 @@
 		e.preventDefault();
 	});
 
-    $("#send-verify-again").click(function(e){        
+    $("#send-verify-again").click(function(e){     
+        $('#send-verify-again').hide();  
+        $("#loading1").show();   
         $.ajax({
             url         : 'postSendVerifyAgain',                                                       
             type        : 'post',
@@ -153,10 +158,8 @@
             },
             error : function(response)
             {
-                setTimeout(function(){
-                    $('.form-control').prop('disabled', false);
-                    // sample delay
-                }, 1000);
+                $("#loading1").hide(); 
+                $('#send-verify-again').show();                    
                 var error = response.responseJSON;
                 var errorHtml = '<ul>';
                 $.each(error, function(key, value){
@@ -173,7 +176,8 @@
                         $('#alert-success').fadeOut('slow');
                     }, 500);
                 }, 1000);
-
+                $("#loading1").hide();  
+                $('#send-verify-again').show();                   
                 $('#alert-fail').hide();
                 var successHtml = '<ul><li>Verification code has been sent again to your email address.</li></ul>';
                 $('#alert-success').html(successHtml).fadeIn('slow');
@@ -183,6 +187,8 @@
     });
 
 	$("#btnVerify").click(function(e){		
+        $('#verify-form').hide(); 
+        $("#loading").show();
 		var data = new FormData(document.forms.namedItem("verifycodeform"));
         $('.form-control').prop('disabled', true);
 		$.ajax({
@@ -193,16 +199,14 @@
             processData : false,
             error : function(response)
             {
-                setTimeout(function(){
-                    $('.form-control').prop('disabled', false);
-                    // sample delay
-                }, 1000);
                 var error = response.responseJSON;
                 var errorHtml = '<ul>';
                 $.each(error, function(key, value){
                     errorHtml += '<li>' + value[0] + '</li>';
                 });
                 errorHtml += '</ul>';
+                $("#loading").hide();
+                $('#verify-form').show(); 
                 $('#alert-fail').html(errorHtml).fadeIn('slow');
                 grecaptcha.reset();
             },
@@ -212,15 +216,15 @@
             	{           
             		var loadUrl = "thankyouForm";         
 	               	$("#vote").load(loadUrl, function(result){
+                        $("#loading").hide();
 	                	$("#navigation-badge-3").addClass('navigation-badge-active');
 	                	$("#navigation-font-3").addClass('navigation-font-active');
 	                });
             	}
             	else
             	{
-            		setTimeout(function(){
-            			$('.form-control').prop('disabled', false);                        
-                    }, 1000);
+                    $("#loading").hide();
+                    $('#verify-form').show(); 
             		var errorHtml = '<ul><li>' + response + '</li></ul>';
             		$('#alert-fail').html(errorHtml).fadeIn('slow');
             	}
