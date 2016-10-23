@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-md-12 col-xs-12 col-sm-9">
-            <img class="img-responsive center-block" src="https://static.wixstatic.com/media/fbd849_badfa26e07fb44e3baac50c9a4226a1a.png/v1/fill/w_368,h_267,al_c,usm_0.66_1.00_0.01/fbd849_badfa26e07fb44e3baac50c9a4226a1a.png">
+            {{ Html::image('images/ew-logo.PNG', 'ew-untar-8th', array('class' => 'img-responsive center-block')) }}
 
             <div class="row">
               <div class="col-md-12 col-xs-12" style="padding: 0 30px 0 30px;">
