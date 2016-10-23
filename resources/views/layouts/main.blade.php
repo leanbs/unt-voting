@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
 
     <!-- Custom styles -->
-    <link rel="stylesheet" href="{{ secure_asset('assets/css/style.css') }}" type="text/css" >
-    <link rel="stylesheet" href="{{ secure_asset('assets/css/c3.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css" >
+    <link rel="stylesheet" href="{{ asset('assets/css/c3.min.css') }}">
 
   <body>
     @yield('page-content')
@@ -37,9 +37,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="{{ secure_asset('assets/js2/c3.min.js') }}"></script>  
-    <script src="{{ secure_asset('assets/js2/d3.min.js') }}"></script>  
-    <script src="{{ secure_asset('assets/js2/script.js') }}"></script>  
+    <script src="{{ asset('assets/js2/c3.min.js') }}"></script>  
+    <script src="{{ asset('assets/js2/d3.min.js') }}"></script>  
+    <script src="{{ asset('assets/js2/script.js') }}"></script>  
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
