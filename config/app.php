@@ -159,7 +159,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
-        Laravel\Socialite\Socialite\ServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         
 
