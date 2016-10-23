@@ -133,7 +133,7 @@ class VoteController extends Controller
                 
                 DB::commit(); 
                 Session::put('data', $data);
-                Session::put('id_vote', $checkVote->id_vote); 
+                Session::put('id_vote', $vote->id_vote); 
                 $this->sendEmail($data);   
                   
             }          
