@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.vote');
-});
+Route::get('/', 'VoteController@getVotePage');
+
 
 //login and register routes
 Route::get('register', 'Auth\AuthController@getRegister');

@@ -35,6 +35,16 @@ class VoteController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function getVotePage()
+    {
+        $booth = Booth::get();
+        $setting = Setting::find(1);
+
+        return view('pages.vote')
+                ->with('booth', $booth)
+                ->with('setting', $setting);
+    }
+
     public function getVoteForm()
     {
         $booth = Booth::get();
