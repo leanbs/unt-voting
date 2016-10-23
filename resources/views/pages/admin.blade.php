@@ -334,7 +334,10 @@
                 rotated: true,
                 x: {
                     type:'category',
-                }
+                },
+                y: {
+                    tick: { format: d3.format("d") }
+                } 
             },
             'color'  : {
                 'pattern': [
